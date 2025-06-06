@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: meal-planner-client
     ports:
-      - "4173:4173"
+      - "7901:4173"
     environment:
       - VITE_API_URL=${VITE_API_URL}
     networks:
@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     container_name: meal-planner-server
     ports:
-      - "8000:8000"
+      - "7900:8000"
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - SECRET_KEY=${SECRET_KEY}
