@@ -157,6 +157,8 @@ class OpenRouterClient:
             "additionalProperties": False,
             "properties": {
                 "name": {"type": "string", "description": "Recipe name"},
+                "description": {"type": "string", "description": "Recipe description"},
+                "emoji": {"type": "string", "description": "Recipe emoji"},
                 "servings": {"type": "integer", "description": "Number of servings"},
                 "prep_time": {"type": "integer", "description": "Preparation time in minutes"},
                 "cook_time": {"type": "integer", "description": "Cooking time in minutes"},
@@ -195,7 +197,7 @@ class OpenRouterClient:
                     "required": ["calories", "protein", "carbs", "fat"]
                 }
             },
-            "required": ["name", "servings", "prep_time", "cook_time", "difficulty", "ingredients", "instructions", "tips", "nutrition"]
+            "required": ["name", "description", "emoji", "servings", "prep_time", "cook_time", "difficulty", "ingredients", "instructions", "tips", "nutrition"]
         }
 
         try:
@@ -279,7 +281,7 @@ class OpenRouterClient:
                                 "additionalProperties": False,
                                 "properties": {
                                     "breakfast": {
-                                        "type": "object",
+                                        "type": ["object", "null"],
                                         "additionalProperties": False,
                                         "properties": {
                                             "name": {"type": "string"},
@@ -307,7 +309,7 @@ class OpenRouterClient:
                                         "required": ["name", "servings", "prep_time", "cook_time", "difficulty", "leftover_from", "makes_leftovers_for", "ingredients"]
                                     },
                                     "lunch": {
-                                        "type": "object",
+                                        "type": ["object", "null"],
                                         "additionalProperties": False,
                                         "properties": {
                                             "name": {"type": "string"},
@@ -362,7 +364,8 @@ class OpenRouterClient:
                                         },
                                         "required": ["name", "servings", "prep_time", "cook_time", "difficulty", "leftover_from", "makes_leftovers_for", "ingredients"]
                                     }
-                                }
+                                },
+                                "required": ["breakfast", "lunch", "dinner"]
                             }
                         },
                         "required": ["day", "meals"]
