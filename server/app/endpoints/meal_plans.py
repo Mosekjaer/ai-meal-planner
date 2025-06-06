@@ -294,17 +294,17 @@ async def generate_meal_plan(
             db.commit()
 
         # Create new meal plan
-        meal_plan = models.MealPlan(
+        new_meal_plan = models.MealPlan(
             user_id=current_user["user_id"],
             week_number=week_info.week_number,
             year=week_info.year
         )
-        db.add(meal_plan)
+        db.add(new_meal_plan)
         db.flush()
 
         # Generate the meal plan with the user's language
         meal_plan_data = openrouter_client.generate_meal_plan(
-            meal_plan.dict(),
+            meal_plan.preferences or {},  # Pass preferences directly from the request
             language=user_language
         )
 
@@ -398,7 +398,7 @@ async def generate_meal_plan(
                 
                 # Create daily meal
                 daily_meal = models.DailyMeal(
-                    meal_plan_id=meal_plan.id,
+                    meal_plan_id=new_meal_plan.id,
                     day_of_week=(day_index - 1) % 7,  # Convert from 1-7 to 0-6
                     meal_type=meal_type,
                     meal_id=meal.id
@@ -406,7 +406,7 @@ async def generate_meal_plan(
                 db.add(daily_meal)
 
         # Create shopping items for all collected ingredients
-        create_shopping_items(db, meal_plan.id, {"recipe": {"ingredientDetails": all_ingredients}})
+        create_shopping_items(db, new_meal_plan.id, {"recipe": {"ingredientDetails": all_ingredients}})
 
         db.commit()
         return meal_plan_data
