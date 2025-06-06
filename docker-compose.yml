@@ -5,6 +5,9 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=${VITE_API_URL}
+        - VITE_ALLOWED_HOSTS=${VITE_ALLOWED_HOSTS}
     container_name: meal-planner-client
     ports:
       - "7901:4173"
