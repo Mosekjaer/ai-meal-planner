@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: meal-planner-client
+    ports:
+      - "4173:4173"
+    environment:
+      - VITE_API_URL=${VITE_API_URL}
+    networks:
+      - meal-planner-network
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: meal-planner-server
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - SECRET_KEY=${SECRET_KEY}
+      - ALGORITHM=${ALGORITHM}
+      - ACCESS_TOKEN_EXPIRE_MINUTES=${ACCESS_TOKEN_EXPIRE_MINUTES}
+      - REFRESH_TOKEN_EXPIRE_DAYS=${REFRESH_TOKEN_EXPIRE_DAYS}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - CORS_ALLOWED_ORIGIN=${CORS_ALLOWED_ORIGIN}
+    networks:
+      - meal-planner-network
+
+#   db:
+#     image: postgres:15-alpine
+#     ports:
+#       - "5432:5432"
+#     environment:
+#       - POSTGRES_USER=postgres
+#       - POSTGRES_PASSWORD=postgres
+#       - POSTGRES_DB=meal_planner
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+
+# volumes:
+#   postgres_data: 
+
+networks:
+  meal-planner-network:
+    driver: bridge 
