@@ -10,6 +10,7 @@ services:
       - "7901:4173"
     environment:
       - VITE_API_URL=${VITE_API_URL}
+      - VITE_ALLOWED_HOSTS=${VITE_ALLOWED_HOSTS}
     networks:
       - meal-planner-network
     depends_on:
