@@ -74,27 +74,40 @@ Once the server is running, you can access:
 
 ## API Endpoints
 
-### Authentication
-- `POST /auth/token` - Get access token and refresh token
-- `POST /auth/refresh` - Refresh access token
+### Authentication (`/auth`)
+- `POST /auth/token` - Login and get access token and refresh token
+- `POST /auth/refresh` - Refresh access token using refresh token
 - `POST /auth/logout` - Logout and revoke refresh token
-- `POST /auth/register` - Create new user
+- `POST /auth/register` - Create new user account
 
-### User Preferences
-- `GET /users/preferences` - Get user preferences
-- `PUT /users/preferences` - Update user preferences
+### User Profile (`/users`)
+- `GET /users/profile` - Get user profile information
+- `PUT /users/profile` - Update user profile information
 
-### Recipes
-- `POST /recipes/generate` - Generate a new recipe
+### User Preferences (`/preferences`)
+- `GET /preferences` - Get user preferences
+- `PUT /preferences` - Update user preferences
+
+### Recipes (`/recipes`)
+- `POST /recipes/generate` - Generate a new recipe based on preferences
 - `GET /recipes/{recipe_id}` - Get recipe details
 
-### Meal Plans
-- `POST /meal-plans/generate` - Generate a new meal plan
-- `GET /meal-plans/current` - Get current meal plan
-- `PUT /meal-plans/current/meals` - Update meal in current plan
+### Meal Plans (`/meal-plans`)
+- `POST /meal-plans/generate` - Generate a meal plan with optional days parameter
+- `GET /meal-plans/current` - Get current week's meal plan
+- `GET /meal-plans/week/{year}/{week}` - Get meal plan for specific week
+- `PUT /meal-plans/current/meals` - Update a meal in current plan
+- `DELETE /meal-plans/reset` - Reset all meal plans
 
-### Shopping List
+### Shopping List (`/shopping-list`)
 - `GET /shopping-list/current` - Get current shopping list
+
+### Ingredients (`/ingredients`)
+- `GET /ingredients/common` - Get list of common ingredients
+- `GET /ingredients/user` - Get user's ingredients
+- `POST /ingredients/user` - Add new ingredient to user's list
+- `PUT /ingredients/user/{id}` - Update user's ingredient
+- `DELETE /ingredients/user/{id}` - Delete user's ingredient
 
 ## Database Schema
 

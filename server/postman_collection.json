@@ -76,7 +76,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"password123\",\n    \"name\": \"Test User\"\n}"
+							"raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"password123\",\n    \"name\": \"Test User\",\n    \"role\": \"user\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/auth/register",
@@ -84,11 +84,100 @@
 							"path": ["auth", "register"]
 						}
 					}
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh_token\": \"your-refresh-token\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/refresh",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "refresh"]
+						}
+					}
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh_token\": \"your-refresh-token\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/logout",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "logout"]
+						}
+					}
 				}
 			]
 		},
 		{
-			"name": "User Preferences",
+			"name": "User Profile",
+			"item": [
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/profile",
+							"host": ["{{base_url}}"],
+							"path": ["users", "profile"]
+						}
+					}
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updated Name\",\n    \"email\": \"updated@example.com\",\n    \"language\": \"en\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users/profile",
+							"host": ["{{base_url}}"],
+							"path": ["users", "profile"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Preferences",
 			"item": [
 				{
 					"name": "Get Preferences",
@@ -101,9 +190,9 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/users/preferences",
+							"raw": "{{base_url}}/preferences",
 							"host": ["{{base_url}}"],
-							"path": ["users", "preferences"]
+							"path": ["preferences"]
 						}
 					}
 				},
@@ -126,115 +215,9 @@
 							"raw": "{\n    \"dietary_restrictions\": [\"vegetarian\"],\n    \"calories_per_day\": 2000,\n    \"meal_complexity\": \"medium\",\n    \"cuisine_preferences\": [\"italian\", \"mexican\"]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/users/preferences",
+							"raw": "{{base_url}}/preferences",
 							"host": ["{{base_url}}"],
-							"path": ["users", "preferences"]
-						}
-					}
-				}
-			]
-		},
-		{
-			"name": "Ingredients",
-			"item": [
-				{
-					"name": "Get Common Ingredients",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/ingredients/common",
-							"host": ["{{base_url}}"],
-							"path": ["ingredients", "common"]
-						}
-					}
-				},
-				{
-					"name": "Get User Ingredients",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/ingredients/user",
-							"host": ["{{base_url}}"],
-							"path": ["ingredients", "user"]
-						}
-					}
-				},
-				{
-					"name": "Add User Ingredient",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Quinoa\",\n    \"quantity\": 1.5,\n    \"unit\": \"cups\",\n    \"emoji\": \"🌾\",\n    \"default_unit\": \"cups\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/ingredients/user",
-							"host": ["{{base_url}}"],
-							"path": ["ingredients", "user"]
-						}
-					}
-				},
-				{
-					"name": "Update User Ingredient",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Quinoa\",\n    \"quantity\": 2.0,\n    \"unit\": \"cups\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/ingredients/user/1",
-							"host": ["{{base_url}}"],
-							"path": ["ingredients", "user", "1"]
-						}
-					}
-				},
-				{
-					"name": "Delete User Ingredient",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/ingredients/user/1",
-							"host": ["{{base_url}}"],
-							"path": ["ingredients", "user", "1"]
+							"path": ["preferences"]
 						}
 					}
 				}
@@ -279,9 +262,9 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/recipes/1",
+							"raw": "{{base_url}}/recipes/{recipe_id}",
 							"host": ["{{base_url}}"],
-							"path": ["recipes", "1"]
+							"path": ["recipes", "{recipe_id}"]
 						}
 					}
 				}
@@ -291,7 +274,7 @@
 			"name": "Meal Plans",
 			"item": [
 				{
-					"name": "Generate Meal Plan (Current Week)",
+					"name": "Generate Meal Plan",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -309,51 +292,14 @@
 							"raw": "{\n    \"dietary_restrictions\": [\"vegetarian\"],\n    \"calories_per_day\": 2000,\n    \"meal_complexity\": \"medium\",\n    \"cuisine_preferences\": [\"italian\", \"mexican\"],\n    \"meal_types\": [\"breakfast\", \"lunch\", \"dinner\"]\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/meal-plans/generate?days=7",
+							"raw": "{{base_url}}/meal-plans/generate",
 							"host": ["{{base_url}}"],
-							"path": ["meal-plans", "generate"],
-							"query": [
-								{
-									"key": "days",
-									"value": "7"
-								}
-							]
+							"path": ["meal-plans", "generate"]
 						}
 					}
 				},
 				{
-					"name": "Generate Meal Plan (Specific Week)",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"dietary_restrictions\": [\"vegetarian\"],\n    \"calories_per_day\": 2000,\n    \"meal_complexity\": \"medium\",\n    \"cuisine_preferences\": [\"italian\", \"mexican\"],\n    \"meal_types\": [\"breakfast\", \"lunch\", \"dinner\"],\n    \"week_info\": {\n        \"week_number\": 20,\n        \"year\": 2024\n    }\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/meal-plans/generate?days=7",
-							"host": ["{{base_url}}"],
-							"path": ["meal-plans", "generate"],
-							"query": [
-								{
-									"key": "days",
-									"value": "7"
-								}
-							]
-						}
-					}
-				},
-				{
-					"name": "Get Current Week's Meal Plan",
+					"name": "Get Current Meal Plan",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -370,7 +316,7 @@
 					}
 				},
 				{
-					"name": "Get Specific Week's Meal Plan",
+					"name": "Get Week Meal Plan",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -380,9 +326,9 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/meal-plans/week/2024/20",
+							"raw": "{{base_url}}/meal-plans/week/{year}/{week_number}",
 							"host": ["{{base_url}}"],
-							"path": ["meal-plans", "week", "2024", "20"]
+							"path": ["meal-plans", "week", "{year}", "{week_number}"]
 						}
 					}
 				},
@@ -412,7 +358,74 @@
 					}
 				},
 				{
-					"name": "Reset All Meal Plans",
+					"name": "Get Meal Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/meal-plans/current/meals/{day_index}/{meal_type}",
+							"host": ["{{base_url}}"],
+							"path": ["meal-plans", "current", "meals", "{day_index}", "{meal_type}"]
+						}
+					}
+				},
+				{
+					"name": "Update Meal Servings",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"day_index\": 1,\n    \"meal_type\": \"lunch\",\n    \"servings\": 4\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/meal-plans/current/servings",
+							"host": ["{{base_url}}"],
+							"path": ["meal-plans", "current", "servings"]
+						}
+					}
+				},
+				{
+					"name": "Update All Meal Servings",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"servings\": 4\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/meal-plans/current/servings/bulk",
+							"host": ["{{base_url}}"],
+							"path": ["meal-plans", "current", "servings", "bulk"]
+						}
+					}
+				},
+				{
+					"name": "Reset Meal Plans",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -447,6 +460,48 @@
 							"raw": "{{base_url}}/shopping-list/current",
 							"host": ["{{base_url}}"],
 							"path": ["shopping-list", "current"]
+						}
+					}
+				},
+				{
+					"name": "Get Week Shopping List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/shopping-list/week/{year}/{week_number}",
+							"host": ["{{base_url}}"],
+							"path": ["shopping-list", "week", "{year}", "{week_number}"]
+						}
+					}
+				},
+				{
+					"name": "Update Shopping Item",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bought\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/shopping-list/items/{item_id}",
+							"host": ["{{base_url}}"],
+							"path": ["shopping-list", "items", "{item_id}"]
 						}
 					}
 				}
