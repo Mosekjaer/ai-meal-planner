@@ -172,7 +172,7 @@ class OpenRouterClient:
                             "unit": {"type": "string", "description": "Unit of measurement (e.g., g, ml, pieces)"},
                             "notes": {"type": "string", "description": "Additional notes about the ingredient"}
                         },
-                        "required": ["name", "amount", "unit"]
+                        "required": ["name", "amount", "unit", "notes"]
                     }
                 },
                 "instructions": {
@@ -191,10 +191,11 @@ class OpenRouterClient:
                         "protein": {"type": "integer"},
                         "carbs": {"type": "integer"},
                         "fat": {"type": "integer"}
-                    }
+                    },
+                    "required": ["calories", "protein", "carbs", "fat"]
                 }
             },
-            "required": ["name", "servings", "prep_time", "cook_time", "difficulty", "ingredients", "instructions"]
+            "required": ["name", "servings", "prep_time", "cook_time", "difficulty", "ingredients", "instructions", "tips", "nutrition"]
         }
 
         try:
@@ -299,11 +300,11 @@ class OpenRouterClient:
                                                         "unit": {"type": "string", "description": "Unit of measurement (e.g., g, ml, pieces)"},
                                                         "notes": {"type": "string", "description": "Additional notes about the ingredient"}
                                                     },
-                                                    "required": ["name", "amount", "unit"]
+                                                    "required": ["name", "amount", "unit", "notes"]
                                                 }
                                             }
                                         },
-                                        "required": ["name", "servings", "ingredients"]
+                                        "required": ["name", "servings", "prep_time", "cook_time", "difficulty", "leftover_from", "makes_leftovers_for", "ingredients"]
                                     },
                                     "lunch": {
                                         "type": "object",
@@ -327,11 +328,11 @@ class OpenRouterClient:
                                                         "unit": {"type": "string", "description": "Unit of measurement (e.g., g, ml, pieces)"},
                                                         "notes": {"type": "string", "description": "Additional notes about the ingredient"}
                                                     },
-                                                    "required": ["name", "amount", "unit"]
+                                                    "required": ["name", "amount", "unit", "notes"]
                                                 }
                                             }
                                         },
-                                        "required": ["name", "servings", "ingredients"]
+                                        "required": ["name", "servings", "prep_time", "cook_time", "difficulty", "leftover_from", "makes_leftovers_for", "ingredients"]
                                     },
                                     "dinner": {
                                         "type": "object",
@@ -355,11 +356,11 @@ class OpenRouterClient:
                                                         "unit": {"type": "string", "description": "Unit of measurement (e.g., g, ml, pieces)"},
                                                         "notes": {"type": "string", "description": "Additional notes about the ingredient"}
                                                     },
-                                                    "required": ["name", "amount", "unit"]
+                                                    "required": ["name", "amount", "unit", "notes"]
                                                 }
                                             }
                                         },
-                                        "required": ["name", "servings", "ingredients"]
+                                        "required": ["name", "servings", "prep_time", "cook_time", "difficulty", "leftover_from", "makes_leftovers_for", "ingredients"]
                                     }
                                 }
                             }
