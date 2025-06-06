@@ -109,7 +109,7 @@ async def refresh_access_token(
 @router.post("/register", response_model=schemas.UserResponse)
 async def create_user(
     user: schemas.UserCreate,
-    current_user: Optional[dict] = Depends(security.get_current_user_optional),
+    current_user: Optional[dict],
     db: Session = Depends(get_db)
 ):
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
