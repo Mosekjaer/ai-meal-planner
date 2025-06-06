@@ -154,6 +154,7 @@ class OpenRouterClient:
 
         recipe_schema = {
             "type": "object",
+            "additionalProperties": False,
             "properties": {
                 "name": {"type": "string", "description": "Recipe name"},
                 "servings": {"type": "integer", "description": "Number of servings"},
@@ -164,6 +165,7 @@ class OpenRouterClient:
                     "type": "array",
                     "items": {
                         "type": "object",
+                        "additionalProperties": False,
                         "properties": {
                             "name": {"type": "string", "description": "Ingredient name"},
                             "amount": {"type": "number", "description": "Quantity of the ingredient"},
@@ -183,6 +185,7 @@ class OpenRouterClient:
                 },
                 "nutrition": {
                     "type": "object",
+                    "additionalProperties": False,
                     "properties": {
                         "calories": {"type": "integer"},
                         "protein": {"type": "integer"},
@@ -261,18 +264,22 @@ class OpenRouterClient:
         
         high_level_plan_schema = {
             "type": "object",
+            "additionalProperties": False,
             "properties": {
                 "days": {
                     "type": "array",
                     "items": {
                         "type": "object",
+                        "additionalProperties": False,
                         "properties": {
                             "day": {"type": "integer"},
                             "meals": {
                                 "type": "object",
+                                "additionalProperties": False,
                                 "properties": {
                                     "breakfast": {
                                         "type": "object",
+                                        "additionalProperties": False,
                                         "properties": {
                                             "name": {"type": "string"},
                                             "servings": {"type": "integer"},
@@ -285,6 +292,7 @@ class OpenRouterClient:
                                                 "type": "array",
                                                 "items": {
                                                     "type": "object",
+                                                    "additionalProperties": False,
                                                     "properties": {
                                                         "name": {"type": "string", "description": "Ingredient name"},
                                                         "amount": {"type": "number", "description": "Quantity of the ingredient"},
@@ -299,6 +307,7 @@ class OpenRouterClient:
                                     },
                                     "lunch": {
                                         "type": "object",
+                                        "additionalProperties": False,
                                         "properties": {
                                             "name": {"type": "string"},
                                             "servings": {"type": "integer"},
@@ -311,6 +320,7 @@ class OpenRouterClient:
                                                 "type": "array",
                                                 "items": {
                                                     "type": "object",
+                                                    "additionalProperties": False,
                                                     "properties": {
                                                         "name": {"type": "string", "description": "Ingredient name"},
                                                         "amount": {"type": "number", "description": "Quantity of the ingredient"},
@@ -325,6 +335,7 @@ class OpenRouterClient:
                                     },
                                     "dinner": {
                                         "type": "object",
+                                        "additionalProperties": False,
                                         "properties": {
                                             "name": {"type": "string"},
                                             "servings": {"type": "integer"},
@@ -337,6 +348,7 @@ class OpenRouterClient:
                                                 "type": "array",
                                                 "items": {
                                                     "type": "object",
+                                                    "additionalProperties": False,
                                                     "properties": {
                                                         "name": {"type": "string", "description": "Ingredient name"},
                                                         "amount": {"type": "number", "description": "Quantity of the ingredient"},
